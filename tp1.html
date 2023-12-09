@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<p id="dateText">This is where the date will be displayed.</p>
+
+
+<button id="clickButton">Click Me</button>
+<p id="lastClick">The button was last clicked at date: N/A</p>
+
+<input type="text" id="input" placeholder="Enter text">
+<button id="addButton">Add</button>
+<ul id="list"></ul>
+<script>
+    var message = "Hello, this is a test message.";
+    console.log(message);
+
+    var someComplexVariable = [1, 2, 3];
+   console.log("Some log message:", someComplexVariable);
+   var someObject = { field1: "value1", field2: "value2" };
+   console.log("Another log message:", someObject);
+
+
+   var var1 = "value1";
+   var var2 = "value2";
+   var var3 = "value3";
+   var var4 = "value4";
+   console.log("Some message:", { var1, var2, field3: [var3, { var4 }] });
+
+   function updateDate() {
+        var dateElement = document.getElementById("dateText");
+        var currentDate = new Date();
+
+        var year = currentDate.getFullYear();
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var hours = String(currentDate.getHours()).padStart(2, '0');
+        var minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        var seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+        var formattedDate = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+        dateElement.textContent = formattedDate;
+    }
+    function handleButtonClick() {
+        var lastClickElement = document.getElementById("lastClick");
+        var currentDate = new Date();
+
+        var year = currentDate.getFullYear();
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var hours = String(currentDate.getHours()).padStart(2, '0');
+        var minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        var seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+        var formattedDate = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+        lastClickElement.textContent = `The button was last clicked at date: ${formattedDate} !`;
+    }
+    var clickButton = document.getElementById("clickButton");
+    clickButton.addEventListener("click", handleButtonClick);
+    setInterval(updateDate, 5000); // 5000 milliseconds = 5 seconds
+
+// Initial call to display the date immediately
+updateDate();
+
+
+
+function handleButtonClick() {
+        var inputElement = document.getElementById("input");
+        var listElement = document.getElementById("list");
+
+        // Get the value from the input field
+        var inputValue = inputElement.value.trim();
+
+        // Check if the input is not empty
+        if (inputValue !== "") {
+            // Create a new list item and add it to the list
+            var listItem = document.createElement("li");
+            listItem.textContent = inputValue;
+            listElement.appendChild(listItem);
+
+            // Clear the input field
+            inputElement.value = "";
+        }
+    }
+
+    // Add a click event handler to the button
+    var addButton = document.getElementById("addButton");
+    addButton.addEventListener("click", handleButtonClick);
+//    var enteredText = prompt("Please enter some text:");
+
+// // 2. Store the user's response in the variable enteredText
+
+// // 3. Display a message in the console and using alert()
+// console.log(`You entered: ${enteredText}`);
+// alert(`You entered: ${enteredText}`);
+ </script>
+ </html>
