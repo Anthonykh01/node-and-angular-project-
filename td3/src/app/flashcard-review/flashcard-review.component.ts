@@ -19,10 +19,14 @@ interface Flashcard {
   templateUrl: './flashcard-review.component.html',
   styleUrls: ['./flashcard-review.component.css']
 })
+// ... other imports ...
+
+
 export class FlashcardReviewComponent implements OnInit {
   flashcards: Flashcard[] = [];
-  currentFlashcard!: Flashcard;
+  currentFlashcard: Flashcard | undefined;
   currentIndex = 0;
+  message = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,22 +38,23 @@ export class FlashcardReviewComponent implements OnInit {
     const courseId = Number(this.route.snapshot.paramMap.get('courseId'));
     this.courseService.getFlashcardsForCourse(courseId).subscribe(data => {
       this.flashcards = data;
-      this.currentFlashcard = this.flashcards[0];
+      this.currentFlashcard = this.flashcards.length > 0 ? this.flashcards[0] : undefined;
+      if (!this.currentFlashcard) {
+        this.message = 'You have finished your assigned cards for today.';
+      }
     });
   }
 
   rateFlashcard(difficulty: 'Easy' | 'Medium' | 'Hard'): void {
     if (this.currentFlashcard) {
-      // Update the flashcard based on the difficulty rating
       this.http.put(`/api/flashcard/${this.currentFlashcard.id}`, { userResponse: difficulty })
         .subscribe(() => {
-          // Move to the next flashcard
           this.currentIndex++;
           if (this.currentIndex < this.flashcards.length) {
             this.currentFlashcard = this.flashcards[this.currentIndex];
           } else {
-            // Handle completion of flashcard review
-            console.log('Completed review of all flashcards');
+            this.currentFlashcard = undefined;
+            this.message = 'You have finished your assigned cards for today.';
           }
         }, error => console.error('Error updating flashcard', error));
     }

@@ -41,7 +41,13 @@ app.get('/api/course', (req: Request, res: Response) => {
 // GET flashcards for a specific course
 app.get('/api/course/:courseId/flashcard', (req: Request, res: Response) => {
     const courseId = parseInt(req.params.courseId);
-    const courseFlashcards = flashcards.filter(f => f.courseId === courseId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to the start of today
+
+    const courseFlashcards = flashcards.filter(f =>
+        f.courseId === courseId &&
+        new Date(f.nextReviewDate).getTime() <= today.getTime() // Include past due dates
+    );
     res.status(200).json(courseFlashcards);
 });
 
