@@ -14,6 +14,8 @@ import { NumberDisplayComponent } from './number-display/number-display.componen
 import { NumberStepsComponent } from './number-steps/number-steps.component';
 import { NumberEditComponent } from './number-edit/number-edit.component';
 import {HttpClientModule} from "@angular/common/http";
+import { LearnComponent } from './learn/learn.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {HttpClientModule} from "@angular/common/http";
     TestPage1Component,
     NumberDisplayComponent,
     NumberStepsComponent,
-    NumberEditComponent
+    NumberEditComponent,
+    LearnComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+<!-- learn.component.html -->
+<div class="container mt-4">
+  <h2 class="mb-4">Available Courses</h2>
+  <div class="list-group">
+    <!-- Dynamic course list will be rendered here -->
+    <a href="#" class="list-group-item list-group-item-action" *ngFor="let course of courses">
+      <h5 class="mb-1">{{ course.name }}</h5>
+      <p class="mb-1">{{ course.description }}</p>
+    </a>
+  </div>
+</div>

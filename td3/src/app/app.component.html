@@ -10,7 +10,7 @@
 <body>
 
 <div class="container-fluid">
-  <!-- Your Original Navbar -->
+  <!-- Navbar with Learn and Add Question Buttons -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Flashcard App</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,61 +18,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/learn">Learn</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Courses</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="#">Add Question</a>
         </li>
       </ul>
     </div>
   </nav>
-
+  <router-outlet></router-outlet>
   <!-- Hero Section -->
-  <section class="hero-section text-center">
-    <h1 class="display-4">Welcome to Your Flashcard App</h1>
-    <p class="lead">A revolutionary way to learn and memorize</p>
-    <a href="#" class="btn btn-primary btn-lg">Explore Courses</a>
-  </section>
 
-  <!-- Features Section -->
-  <section class="features-section py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="feature-box">
-            <h3>Interactive Learning</h3>
-            <p>Engage with dynamic flashcards that make learning stick.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-box">
-            <h3>Spaced Repetition</h3>
-            <p>Remember more with our scientifically proven technique.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-box">
-            <h3>Wide Range of Topics</h3>
-            <p>Choose from a diverse collection of subjects and topics.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer text-center">
-    <div class="container">
-      <p class="mb-0">© 2023 Flashcard App. All rights reserved.</p>
-    </div>
-  </footer>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

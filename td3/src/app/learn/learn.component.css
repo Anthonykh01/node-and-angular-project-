@@ -1,0 +1,9 @@
+/* learn.component.css */
+.container {
+  max-width: 800px;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
