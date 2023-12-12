@@ -1,6 +1,7 @@
 // learn.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Course, CourseService } from '../course.service'; // Import the Course interface
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learn',
@@ -10,7 +11,7 @@ import { Course, CourseService } from '../course.service'; // Import the Course 
 export class LearnComponent implements OnInit {
   courses: Course[] = []; // Define courses as an array of Course
 
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService ,private router: Router) { }
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe(
@@ -21,5 +22,8 @@ export class LearnComponent implements OnInit {
         console.error('There was an error fetching courses', error);
       }
     );
+  }
+  onSelectCourse(courseId: number): void {
+    this.router.navigate(['/review', courseId]);
   }
 }

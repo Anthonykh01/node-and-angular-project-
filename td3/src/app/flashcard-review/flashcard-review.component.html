@@ -1,0 +1,9 @@
+<div class="container mt-4" *ngIf="currentFlashcard">
+  <h2>{{ currentFlashcard.question }}</h2>
+  <p>{{ currentFlashcard.answer }}</p>
+
+  <!-- Response Buttons -->
+  <button class="btn btn-success" (click)="rateFlashcard('Easy')">Easy</button>
+  <button class="btn btn-warning" (click)="rateFlashcard('Medium')">Medium</button>
+  <button class="btn btn-danger" (click)="rateFlashcard('Hard')">Hard</button>
+</div>

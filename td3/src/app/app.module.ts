@@ -16,6 +16,7 @@ import { NumberEditComponent } from './number-edit/number-edit.component';
 import {HttpClientModule} from "@angular/common/http";
 import { LearnComponent } from './learn/learn.component';
 import { HomeComponent } from './home/home.component';
+import { FlashcardReviewComponent } from './flashcard-review/flashcard-review.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
     NumberStepsComponent,
     NumberEditComponent,
     LearnComponent,
-    HomeComponent
+    HomeComponent,
+    FlashcardReviewComponent
   ],
   imports: [
     BrowserModule,
