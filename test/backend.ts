@@ -1,70 +1,67 @@
 import express, { Request, Response } from 'express';
 
-// TypeScript interface for Flashcards
 interface Flashcard {
     id: number;
+    courseId: number;
     question: string;
     answer: string;
     nextReviewDate: Date;
-    repetition: number;
-    interval: number;
     easeFactor: number;
 }
 
-// Create a new express application instance
+interface Course {
+    id: number;
+    name: string;
+    description: string;
+}
+
 const app: express.Application = express();
-
-// The port the express app will listen on
 const port: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+app.use(express.json());
 
-app.use(express.json()); // Middleware to parse JSON
+// Sample data
+const courses: Course[] = [
+    { id: 1, name: 'Basic TypeScript', description: 'Introduction to TypeScript' },
+    { id: 2, name: 'World Capitals', description: 'Learn about capitals around the world' },
+    // Add more courses as needed
+];
 
-// Hardcoded data for flashcards
 const flashcards: Flashcard[] = [
-    { id: 1, question: 'What is TypeScript?', answer: 'A superset of JavaScript', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
-    { id: 2, question: 'What is the capital of France?', answer: 'Paris', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
-    { id: 3, question: 'What is the chemical symbol for water?', answer: 'H2O', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
-    { id: 4, question: 'Who wrote Romeo and Juliet?', answer: 'William Shakespeare', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
+    { id: 1, courseId: 1, question: 'What is TypeScript?', answer: 'A superset of JavaScript', nextReviewDate: new Date(), easeFactor: 2.5 },
+    { id: 2, courseId: 2, question: 'What is the capital of France?', answer: 'Paris', nextReviewDate: new Date(), easeFactor: 2.5 },
     // Add more flashcards as needed
 ];
 
-// GET all flashcards
-app.get('/api/flashcard', (req: Request, res: Response) => {
-    res.status(200).json(flashcards);
+// GET all courses
+app.get('/api/course', (req: Request, res: Response) => {
+    res.status(200).json(courses);
 });
 
-// GET a specific flashcard by ID
-app.get('/api/flashcard/:id', (req: Request, res: Response) => {
-    const flashcardId = parseInt(req.params.id);
-    const flashcard = flashcards.find(f => f.id === flashcardId);
-
-    if (flashcard) {
-        res.status(200).json(flashcard);
-    } else {
-        res.status(404).send(`Flashcard not found for id: ${flashcardId}`);
-    }
+// GET flashcards for a specific course
+app.get('/api/course/:courseId/flashcard', (req: Request, res: Response) => {
+    const courseId = parseInt(req.params.courseId);
+    const courseFlashcards = flashcards.filter(f => f.courseId === courseId);
+    res.status(200).json(courseFlashcards);
 });
 
 // POST a new flashcard
 app.post('/api/flashcard', (req: Request, res: Response) => {
-    const newFlashcard: Flashcard = {
-        ...req.body,
-        id: flashcards.length + 1, // Simple ID assignment
-        nextReviewDate: new Date(), // Initialize with current date
-        repetition: 0,
-        interval: 1,
-        easeFactor: 2.5
-    };
+    const newFlashcard: Flashcard = { ...req.body, id: flashcards.length + 1, nextReviewDate: new Date() };
     flashcards.push(newFlashcard);
     res.status(200).json(newFlashcard);
 });
 
-// PUT - Update a flashcard
+// PUT - Update a flashcard (for user responses)
 app.put('/api/flashcard/:id', (req: Request, res: Response) => {
     const flashcardId = parseInt(req.params.id);
     const flashcardIndex = flashcards.findIndex(f => f.id === flashcardId);
 
     if (flashcardIndex > -1) {
+        // Update nextReviewDate based on user response
+        const userResponse = req.body.userResponse; // 'Easy', 'Medium', or 'Hard'
+        // Logic to calculate nextReviewDate based on userResponse goes here
+        // ...
+
         flashcards[flashcardIndex] = { ...flashcards[flashcardIndex], ...req.body };
         res.status(200).json(flashcards[flashcardIndex]);
     } else {
@@ -72,7 +69,6 @@ app.put('/api/flashcard/:id', (req: Request, res: Response) => {
     }
 });
 
-// Serve the application at the given port
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
 });
