@@ -21,9 +21,11 @@ app.use(express.json()); // Middleware to parse JSON
 
 // Hardcoded data for flashcards
 const flashcards: Flashcard[] = [
-    // Example flashcard
     { id: 1, question: 'What is TypeScript?', answer: 'A superset of JavaScript', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
-    // Add other flashcards as needed
+    { id: 2, question: 'What is the capital of France?', answer: 'Paris', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
+    { id: 3, question: 'What is the chemical symbol for water?', answer: 'H2O', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
+    { id: 4, question: 'Who wrote Romeo and Juliet?', answer: 'William Shakespeare', nextReviewDate: new Date(), repetition: 0, interval: 1, easeFactor: 2.5 },
+    // Add more flashcards as needed
 ];
 
 // GET all flashcards
