@@ -21,6 +21,19 @@ export class FlashcardReviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.refreshFlashcards();
+    const courseId = Number(this.route.snapshot.paramMap.get('courseId'));
+    this.courseService.getFlashcardsForCourse(courseId).subscribe(data => {
+      this.flashcards = data;
+      this.currentFlashcard = this.flashcards.length > 0 ? this.flashcards[0] : undefined;
+      if (!this.currentFlashcard) {
+        this.message = 'You have finished your assigned cards for today.';
+      }
+    });
+  }
+
+
+  refreshFlashcards(): void {
     const courseId = Number(this.route.snapshot.paramMap.get('courseId'));
     this.courseService.getFlashcardsForCourse(courseId).subscribe(data => {
       this.flashcards = data;

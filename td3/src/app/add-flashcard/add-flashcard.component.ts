@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService, Course, Flashcard } from '../course.service';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-add-flashcard',
@@ -9,9 +10,12 @@ import { CourseService, Course, Flashcard } from '../course.service';
 export class AddFlashcardComponent implements OnInit {
   courses: Course[] = [];
   selectedCourseId: number | null = null;
-  newFlashcard: Flashcard = { question: '', answer: '', courseId: 0 };  // Initialize courseId to 0
+  newFlashcard: Flashcard = { question: '', answer: '', courseId: 0 };
 
-  constructor(private courseService: CourseService) { }
+  constructor(
+    private courseService: CourseService,
+    private router: Router // Inject Router here
+  ) { }
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe(
@@ -23,10 +27,11 @@ export class AddFlashcardComponent implements OnInit {
   onSubmit(): void {
     if (this.selectedCourseId != null) {
       this.newFlashcard.courseId = this.selectedCourseId;
-      this.courseService.addFlashcard(this.selectedCourseId, this.newFlashcard).subscribe(  // Pass both courseId and flashcard
+      this.courseService.addFlashcard(this.selectedCourseId, this.newFlashcard).subscribe(
         response => {
           console.log('Flashcard added:', response);
           this.resetForm();
+          this.router.navigate(['/review', this.selectedCourseId]); // Navigate after adding flashcard
         },
         error => console.error('Error adding flashcard:', error)
       );
@@ -36,7 +41,7 @@ export class AddFlashcardComponent implements OnInit {
   }
 
   private resetForm(): void {
-    this.newFlashcard = { question: '', answer: '', courseId: 0 }; // Reset courseId to 0
+    this.newFlashcard = { question: '', answer: '', courseId: 0 };
     this.selectedCourseId = null;
   }
 }

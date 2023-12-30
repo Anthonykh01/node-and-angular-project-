@@ -35,7 +35,7 @@ export class CourseService {
   }
 
   addFlashcard(courseId: number, flashcard: Flashcard): Observable<Flashcard> {
-    return this.http.post<Flashcard>('/api/flashcard', flashcard);
+    return this.http.post<Flashcard>(`${this.apiUrl}/${courseId}/flashcard`, flashcard);
   }
 
   addCourse(newCourse: Course): Observable<Course> {
