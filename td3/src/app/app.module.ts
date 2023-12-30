@@ -17,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { LearnComponent } from './learn/learn.component';
 import { HomeComponent } from './home/home.component';
 import { FlashcardReviewComponent } from './flashcard-review/flashcard-review.component';
+import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FlashcardReviewComponent } from './flashcard-review/flashcard-review.co
     NumberEditComponent,
     LearnComponent,
     HomeComponent,
-    FlashcardReviewComponent
+    FlashcardReviewComponent,
+    AddFlashcardComponent
   ],
   imports: [
     BrowserModule,

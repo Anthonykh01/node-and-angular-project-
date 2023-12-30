@@ -7,6 +7,7 @@ import {TestPage1Component} from "./test-page1/test-page1.component";
 import { LearnComponent } from './learn/learn.component';
 import { HomeComponent } from './home/home.component';
 import { FlashcardReviewComponent } from './flashcard-review/flashcard-review.component';
+import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path:'test-page1', component: TestPage1Component },
   {path: 'learn', component: LearnComponent},
   { path: 'review/:courseId', component: FlashcardReviewComponent },
+  { path: 'add-flashcard', component: AddFlashcardComponent },
 ];
 
 @NgModule({

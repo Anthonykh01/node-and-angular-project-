@@ -15,7 +15,13 @@ const courses = [
 ];
 const flashcards = [
     { id: 1, courseId: 1, question: 'What is TypeScript?', answer: 'A superset of JavaScript', nextReviewDate: new Date(), easeFactor: 2.5, interval: 1 },
-    { id: 2, courseId: 2, question: 'What is the capital of France?', answer: 'Paris', nextReviewDate: new Date(), easeFactor: 2.5, interval: 1 },
+    { id: 2, courseId: 1, question: 'What are TypeScript interfaces?', answer: 'Custom types to describe object structures', nextReviewDate: new Date(), easeFactor: 2.5, interval: 1 },
+    { id: 3, courseId: 1, question: 'What is TypeScript used for?', answer: 'Building large scale applications with JavaScript', nextReviewDate: new Date(), easeFactor: 2.5, interval: 1 },
+    // Additional flashcards for World Capitals course, with past nextReviewDate
+    { id: 4, courseId: 2, question: 'What is the capital of France?', answer: 'Paris', nextReviewDate: new Date(new Date().setDate(new Date().getDate() - 1)), easeFactor: 2.5, interval: 1 },
+    { id: 5, courseId: 2, question: 'What is the capital of Japan?', answer: 'Tokyo', nextReviewDate: new Date(new Date().setDate(new Date().getDate() - 2)), easeFactor: 2.5, interval: 1 },
+    { id: 6, courseId: 2, question: 'What is the capital of Italy?', answer: 'Rome', nextReviewDate: new Date(new Date().setDate(new Date().getDate() - 3)), easeFactor: 2.5, interval: 1 },
+    // Add more flashcards as needed
     // Add more flashcards as needed
 ];
 // GET all courses
@@ -25,7 +31,11 @@ app.get('/api/course', (req, res) => {
 // GET flashcards for a specific course
 app.get('/api/course/:courseId/flashcard', (req, res) => {
     const courseId = parseInt(req.params.courseId);
-    const courseFlashcards = flashcards.filter(f => f.courseId === courseId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to the start of today
+    const courseFlashcards = flashcards.filter(f => f.courseId === courseId &&
+        new Date(f.nextReviewDate).getTime() <= today.getTime() // Include past due dates
+    );
     res.status(200).json(courseFlashcards);
 });
 // POST a new course

@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>Add New Flashcard</h2>
+
+  <!-- Flashcard Form -->
+  <form (ngSubmit)="onSubmit()">
+    <!-- Course Selector -->
+    <div class="form-group">
+      <label for="courseSelect">Course</label>
+      <select class="form-control" id="courseSelect" [(ngModel)]="selectedCourseId" name="selectedCourseId">
+        <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+      </select>
+    </div>
+
+    <!-- Flashcard Question -->
+    <div class="form-group">
+      <label for="questionInput">Question</label>
+      <input type="text" class="form-control" id="questionInput" [(ngModel)]="newFlashcard.question" name="question" required>
+    </div>
+
+    <!-- Flashcard Answer -->
+    <div class="form-group">
+      <label for="answerInput">Answer</label>
+      <input type="text" class="form-control" id="answerInput" [(ngModel)]="newFlashcard.answer" name="answer" required>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add Flashcard</button>
+  </form>
+
+</div>

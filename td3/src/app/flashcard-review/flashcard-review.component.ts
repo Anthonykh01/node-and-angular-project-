@@ -1,27 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CourseService } from '../course.service';
+import { CourseService, Flashcard } from '../course.service';
 import { HttpClient } from '@angular/common/http';
-
-// Define the Flashcard interface based on your backend structure
-interface Flashcard {
-  id: number;
-  courseId: number;
-  question: string;
-  answer: string;
-  nextReviewDate: Date;
-  easeFactor: number;
-  interval: number;
-}
 
 @Component({
   selector: 'app-flashcard-review',
   templateUrl: './flashcard-review.component.html',
   styleUrls: ['./flashcard-review.component.css']
 })
-// ... other imports ...
-
-
 export class FlashcardReviewComponent implements OnInit {
   flashcards: Flashcard[] = [];
   currentFlashcard: Flashcard | undefined;
